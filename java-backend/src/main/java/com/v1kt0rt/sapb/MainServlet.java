@@ -3,16 +3,23 @@ package com.v1kt0rt.sapb;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 public class MainServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		writeResult(req, resp, "Hello World!");
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		String body = new BufferedReader(new InputStreamReader(req.getInputStream(), StandardCharsets.UTF_8))
+				.lines()
+				.collect(Collectors.joining("\n"));
+		writeResult(req, resp, "received " + body);
 	}
 
 	private void writeResult(HttpServletRequest req, HttpServletResponse resp, String response) throws IOException {

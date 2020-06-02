@@ -1,5 +1,34 @@
 <html>
 <body>
-Some content for admins.
+<textarea id="commandArea" style="width:100%"></textarea>
+<button style="float:right;" onclick="sendCommand()">Submit command</button>
+<div id="commhistory"></div>
+</div>
+<script type="text/javascript">
+    function sendCommand() {
+        var cmdArea = document.getElementById("commandArea");
+        var cmd = cmdArea.value;
+        appendText("> " + cmd);
+        cmdArea.value = "";
+        cmdArea.focus();
+        
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "/api/", true);
+        xhttp.setRequestHeader("Content-type", "text/plain");
+        xhttp.onreadystatechange = function() {
+            if(xhttp.readyState == 4 && xhttp.status == 200) {
+                 appendText("< " + xhttp.responseText);
+             }
+        }
+        xhttp.send(cmd);
+    }
+    
+    function appendText(text) {
+        var node = document.createElement("div");
+        var textnode = document.createTextNode(text);
+        node.appendChild(textnode);
+        document.getElementById("commhistory").appendChild(node);        
+    }
+</script>
 </body>
 </html>
