@@ -1,5 +1,6 @@
 package com.v1kt0rt.sapb;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +9,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 public class MainServlet extends HttpServlet {
+
+	private ServiceLocator sl;
+
+	@Override
+	public void init(ServletConfig config) {
+		sl = (ServiceLocator) config.getServletContext().getAttribute(ServletContextListener.SL_ATTR_NAME);
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -19,7 +27,7 @@ public class MainServlet extends HttpServlet {
 		String body = new BufferedReader(new InputStreamReader(req.getInputStream(), StandardCharsets.UTF_8))
 				.lines()
 				.collect(Collectors.joining("\n"));
-		writeResult(req, resp, "received " + body);
+		writeResult(req, resp, sl.processCommand(body));
 	}
 
 	private void writeResult(HttpServletRequest req, HttpServletResponse resp, String response) throws IOException {
