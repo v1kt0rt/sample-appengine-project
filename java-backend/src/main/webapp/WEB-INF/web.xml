@@ -1,34 +1,34 @@
 <!-- DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd" -->
 <web-app version="2.3" xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-                             http://java.sun.com/xml/ns/javaee/web-app_2_3.xsd">
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+							 http://java.sun.com/xml/ns/javaee/web-app_2_3.xsd">
 
-    <display-name>sample-appengine-project</display-name>
+	<display-name>sample-appengine-project</display-name>
 
 
-    <listener>
-        <listener-class>com.v1kt0rt.sapb.ServletContextListener</listener-class>
-    </listener>
+	<listener>
+		<listener-class>com.v1kt0rt.sapb.ServletContextListener</listener-class>
+	</listener>
 
-    <servlet>
-        <servlet-name>SampleMainServlet</servlet-name>
-        <servlet-class>com.v1kt0rt.sapb.MainServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+	<servlet>
+		<servlet-name>SampleMainServlet</servlet-name>
+		<servlet-class>com.v1kt0rt.sapb.MainServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 
-    <servlet-mapping>
-        <servlet-name>SampleMainServlet</servlet-name>
-        <url-pattern>/api/*</url-pattern>
-    </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SampleMainServlet</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
 
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>admin content</web-resource-name>
-            <url-pattern>/admin/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>admin</role-name>
-        </auth-constraint>
-    </security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>admin content</web-resource-name>
+			<url-pattern>/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
 </web-app>
