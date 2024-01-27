@@ -5,6 +5,7 @@
 							 http://java.sun.com/xml/ns/javaee/web-app_2_3.xsd">
 
 	<display-name>sample-appengine-project</display-name>
+	<app-engine-apis>true</app-engine-apis>
 
 
 	<listener>
